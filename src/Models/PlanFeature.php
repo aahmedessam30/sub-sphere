@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AhmedEssam\SubSphere\Models;
 
-use AhmedEssam\SubSphere\Casts\FlexibleValueCast;
+use AhmedEssam\SubSphere\Casts\TranslatableFlexibleValueCast;
 use AhmedEssam\SubSphere\Enums\FeatureResetPeriod;
 use AhmedEssam\SubSphere\Traits\HandlesFlexibleValues;
 use AhmedEssam\SubSphere\Traits\HasTranslatableHelpers;
@@ -40,7 +40,7 @@ class PlanFeature extends Model
 
     protected $casts = [
         'reset_period' => FeatureResetPeriod::class,
-        'value' => FlexibleValueCast::class,
+        'value' => TranslatableFlexibleValueCast::class,
     ];
 
     /**

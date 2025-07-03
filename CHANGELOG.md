@@ -2,6 +2,92 @@
 
 All notable changes to `sub-sphere` will be documented in this file.
 
+## [v1.1.0] - 2025-07-03
+
+### 🌍 **New Feature: Translatable Flexible Values**
+
+#### ✨ **Major Enhancement**
+
+- **Translatable Plan Features** - Plan feature values can now be different per locale
+- **Smart Fallback System** - Automatic fallback to default locale when translation missing
+- **Full Backward Compatibility** - Existing non-translatable features continue to work unchanged
+- **Unified API** - Single trait handles both translatable and non-translatable values seamlessly
+
+#### 🔧 **Technical Improvements**
+
+##### New Components
+
+- **`TranslatableFlexibleValueCast`** - New cast for handling translatable flexible values
+- **Enhanced `HandlesFlexibleValues` trait** - Unified trait with comprehensive flexible value operations
+- **Locale-aware methods** - All flexible value methods now support optional locale parameter
+
+##### Core Features
+
+- **Multi-locale Value Storage** - Store different feature values for different languages
+  ```php
+  $feature->value = [
+      'en' => 1000,
+      'ar' => 2000,
+      'fr' => 1500
+  ];
+  ```
+- **Locale-aware Access** - Get values for specific locales with automatic fallback
+  ```php
+  $feature->getLocalizedValue('ar');     // 2000
+  $feature->getLocalizedValue('de');     // Falls back to 'en': 1000
+  ```
+- **Translation Management** - Full CRUD operations for translatable values
+  ```php
+  $feature->setValueForLocale('es', 1200);
+  $feature->getValueLocales();           // ['en', 'ar', 'fr', 'es']
+  $feature->hasValueTranslation('es');   // true
+  ```
+
+##### Enhanced API (30+ Methods)
+
+- **Type Detection** - `isNumericFeature('ar')`, `isBooleanFeature('fr')`
+- **Value Access** - `getNumericValue('en')`, `getBooleanValue('ar')`
+- **Validation** - `isEnabled('fr')`, `isUnlimited('en')`
+- **Comparison** - `compareValue(1200, 'ar')`, `isBetterThan(500, 'en')`
+- **Display** - `getDisplayValue('ar')`, `getLocalizedDisplayValue('fr')`
+
+#### 🧪 **Testing & Quality**
+
+- **Comprehensive Test Suite** - 27 new tests covering all translatable scenarios
+- **100% Backward Compatibility** - All existing tests pass without modification
+- **Edge Case Coverage** - Null values, single values, mixed scenarios
+- **Locale Fallback Testing** - Complete fallback behavior validation
+
+#### 📚 **Documentation**
+
+- **Complete Documentation** - New `docs/TRANSLATABLE_VALUES.md` guide
+- **Usage Examples** - Real-world examples for all features
+- **Migration Guide** - How to upgrade existing features to translatable
+- **Best Practices** - Recommended patterns and approaches
+
+#### 🏗️ **Architecture Improvements**
+
+- **Code Consolidation** - Merged duplicate functionality into unified trait
+- **Zero Duplication** - Eliminated all redundant code between traits
+- **Performance Optimization** - Single trait lookup instead of multiple
+- **Cleaner Codebase** - Reduced from 2 traits to 1 comprehensive trait
+
+#### 🎯 **Use Cases**
+
+- **Multi-language SaaS** - Different plan limits per market/locale
+- **Regional Pricing** - Feature values that vary by region
+- **Localized Features** - Features with culture-specific configurations
+- **A/B Testing** - Different feature limits for different user segments
+
+### 🔄 **Internal Changes**
+
+- **Trait Unification** - `HandlesFlexibleValues` and `HandlesTranslatableFlexibleValues` merged
+- **Method Consistency** - All methods follow consistent parameter patterns
+- **Type Safety** - Enhanced type hints and return types throughout
+- **Code Quality** - Improved documentation and inline comments
+
+---
+
 ## [v1.0.0] - 2025-07-01
 
 ### 🎉 Initial Release
