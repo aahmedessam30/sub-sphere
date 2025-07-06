@@ -107,7 +107,7 @@ class ExpireSubscriptionsCommand extends BaseSubscriptionCommand
                         ->where('ends_at', '<=', now());
                 });
             })
-            ->with(['subscriber', 'plan', 'pricing'])
+            ->with(['subscriber', 'plan', 'planPricing'])
             ->orderBy('ends_at');
 
         if ($limit) {
