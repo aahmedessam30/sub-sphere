@@ -2,6 +2,68 @@
 
 All notable changes to `sub-sphere` will be documented in this file.
 
+## [v1.2.0] - 2025-07-06
+
+### 🔄 **Enhanced Subscription Management**
+
+#### ✨ **New Feature: Subscription Renewal**
+
+- **Enhanced `HasSubscriptions` Trait** - Added comprehensive subscription renewal functionality
+- **Smart Renewal Logic** - Automatic validation of renewal eligibility and subscription state
+- **Robust Error Handling** - Comprehensive logging and graceful failure handling
+- **Action Pattern Integration** - Uses existing `RenewSubscriptionAction` for consistency
+
+#### 🔧 **Technical Improvements**
+
+##### New Method
+
+- **`renewSubscription()`** - Renew current active subscription with validation
+  ```php
+  // Simple renewal attempt
+  if ($user->renewSubscription()) {
+      echo "Subscription renewed successfully!";
+  } else {
+      echo "Unable to renew - may need new subscription";
+  }
+  ```
+
+##### Key Features
+
+- **Active Subscription Validation** - Only allows renewal of active/grace period subscriptions
+- **Renewal Eligibility Check** - Uses `canRenew()` method for business logic validation
+- **Manual Renewal Flag** - Explicitly marks renewals as manual (not auto-renewal)
+- **Comprehensive Logging** - Detailed error logging with subscriber and subscription context
+- **Boolean Return** - Clean `true`/`false` return for easy conditional logic
+
+##### Business Logic
+
+- **Requires Active Subscription** - Must have subscription in active status or grace period
+- **Grace Period Support** - Can renew subscriptions still within grace period
+- **Expired Subscription Handling** - Returns `false` for completely expired subscriptions
+- **Fallback Pattern** - Perfect for "renew or subscribe" service patterns
+
+#### 🎯 **Use Cases**
+
+- **Manual Subscription Renewal** - User-initiated renewal through UI
+- **Renewal vs New Subscription** - Service layer can attempt renewal first, then new subscription
+- **Grace Period Extensions** - Allow renewals during grace periods
+- **Subscription Recovery** - Help users maintain continuous service
+
+#### 🏗️ **Code Quality Improvements**
+
+- **Consistent Code Style** - Improved array formatting and alignment throughout trait
+- **Enhanced Documentation** - Clear method documentation with business logic explanation
+- **Error Context** - Rich error logging with subscriber type, ID, and subscription details
+- **Pattern Consistency** - Follows same patterns as `cancelSubscription()` and `resumeSubscription()`
+
+### 🔄 **Internal Changes**
+
+- **Code Formatting** - Improved array alignment and consistency in `HasSubscriptions` trait
+- **Import Addition** - Added `RenewSubscriptionAction` import for renewal functionality
+- **Method Organization** - Logical grouping of subscription management methods
+
+---
+
 ## [v1.1.0] - 2025-07-03
 
 ### 🌍 **New Feature: Translatable Flexible Values**

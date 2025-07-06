@@ -16,6 +16,7 @@ use AhmedEssam\SubSphere\Events\SubscriptionChanged;
 use AhmedEssam\SubSphere\Actions\ChangeSubscriptionPlanAction;
 use AhmedEssam\SubSphere\Actions\CancelSubscriptionAction;
 use AhmedEssam\SubSphere\Actions\ResumeSubscriptionAction;
+use AhmedEssam\SubSphere\Actions\RenewSubscriptionAction;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Log;
@@ -222,7 +223,7 @@ trait HasSubscriptions
                     $newSubscription->plan,
                     [
                         'reset_usage' => $shouldResetUsage,
-                        'changed_at' => now(),
+                        'changed_at'  => now(),
                     ]
                 ));
                 return true;
@@ -232,11 +233,11 @@ trait HasSubscriptions
         } catch (\Exception $e) {
             // Log the error but don't throw - return false to indicate failure
             Log::error('Plan change failed', [
-                'subscriber_id' => $this->getKey(),
+                'subscriber_id'   => $this->getKey(),
                 'subscriber_type' => get_class($this),
                 'current_plan_id' => $subscription->plan_id,
-                'new_plan_id' => $newPlanId,
-                'error' => $e->getMessage(),
+                'new_plan_id'     => $newPlanId,
+                'error'           => $e->getMessage(),
             ]);
 
             return false;
@@ -260,10 +261,10 @@ trait HasSubscriptions
             return true;
         } catch (\Exception $e) {
             Log::error('Subscription cancellation failed', [
-                'subscriber_id' => $this->getKey(),
+                'subscriber_id'   => $this->getKey(),
                 'subscriber_type' => get_class($this),
                 'subscription_id' => $subscription->id,
-                'error' => $e->getMessage(),
+                'error'           => $e->getMessage(),
             ]);
 
             return false;
@@ -292,10 +293,42 @@ trait HasSubscriptions
             return true;
         } catch (\Exception $e) {
             Log::error('Subscription resumption failed', [
-                'subscriber_id' => $this->getKey(),
+                'subscriber_id'   => $this->getKey(),
                 'subscriber_type' => get_class($this),
                 'subscription_id' => $subscription->id,
-                'error' => $e->getMessage(),
+                'error'           => $e->getMessage(),
+            ]);
+
+            return false;
+        }
+    }
+
+    /**
+     * Renew current active subscription
+     */
+    public function renewSubscription(): bool
+    {
+        $subscription = $this->activeSubscription();
+
+        if (!$subscription) {
+            return false;
+        }
+
+        // Check if subscription can be renewed
+        if (!$subscription->canRenew()) {
+            return false;
+        }
+
+        try {
+            $renewAction = new RenewSubscriptionAction($subscription, false); // Manual renewal
+            $renewAction->execute();
+            return true;
+        } catch (\Exception $e) {
+            Log::error('Subscription renewal failed', [
+                'subscriber_id'   => $this->getKey(),
+                'subscriber_type' => get_class($this),
+                'subscription_id' => $subscription->id,
+                'error'           => $e->getMessage(),
             ]);
 
             return false;
@@ -347,13 +380,13 @@ trait HasSubscriptions
     {
         $defaults = [
             'subscriber_type' => get_class($this),
-            'subscriber_id' => $this->id,
-            'plan_id' => $plan->id,
+            'subscriber_id'   => $this->id,
+            'plan_id'         => $plan->id,
             'plan_pricing_id' => $pricing->id,
-            'status' => SubscriptionStatus::ACTIVE,
+            'status'          => SubscriptionStatus::ACTIVE,
             'is_auto_renewal' => false,
-            'starts_at' => now(),
-            'ends_at' => $pricing->duration_in_days > 0 ? now()->addDays($pricing->duration_in_days) : null,
+            'starts_at'       => now(),
+            'ends_at'         => $pricing->duration_in_days > 0 ? now()->addDays($pricing->duration_in_days) : null,
         ];
 
         return $this->subscriptions()->create(array_merge($defaults, $attributes));
