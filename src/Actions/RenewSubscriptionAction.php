@@ -36,7 +36,7 @@ class RenewSubscriptionAction extends BaseAction
         $validator->validatePlanAvailability($this->subscription->plan);
 
         // Validate that the pricing is still available
-        $validator->validatePricingAvailability($this->subscription->pricing);
+        $validator->validatePricingAvailability($this->subscription->planPricing);
     }
 
     /**
@@ -45,7 +45,7 @@ class RenewSubscriptionAction extends BaseAction
     public function execute(): Subscription
     {
         // Get renewal duration from pricing
-        $durationDays = $this->subscription->pricing->duration_in_days;
+        $durationDays = $this->subscription->planPricing->duration_in_days;
 
         // Extend subscription period
         $this->subscription->extend($durationDays);
@@ -87,7 +87,7 @@ class RenewSubscriptionAction extends BaseAction
             return null; // Lifetime subscription
         }
 
-        $durationDays = $this->subscription->pricing->duration_in_days;
+        $durationDays = $this->subscription->planPricing->duration_in_days;
         return $this->subscription->ends_at->copy()->addDays($durationDays);
     }
 }

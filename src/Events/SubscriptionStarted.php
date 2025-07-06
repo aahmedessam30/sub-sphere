@@ -39,6 +39,6 @@ class SubscriptionStarted implements ShouldQueue
      */
     public function getPricing(): \AhmedEssam\SubSphere\Models\PlanPricing
     {
-        return $this->subscription->pricing;
+        return $this->subscription->planPricing;
     }
 }

@@ -135,7 +135,7 @@ class RenewSubscriptionsCommand extends BaseSubscriptionCommand
             $canRenew = false;
             $failureReason = 'Plan is no longer active';
         }        // Check if pricing is still available
-        if ($canRenew && $subscription->pricing->deleted_at !== null) {
+        if ($canRenew && $subscription->planPricing->deleted_at !== null) {
             // Business rule: Do not allow renewal with alternative pricing
             // This ensures subscription integrity and prevents confusion
             $canRenew = false;

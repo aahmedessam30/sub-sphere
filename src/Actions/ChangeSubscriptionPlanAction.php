@@ -94,7 +94,7 @@ class ChangeSubscriptionPlanAction
     {
         // Check if downgrades are allowed
         if (!config('sub-sphere.plan_changes.allow_downgrades', true)) {
-            $changeType = $this->determineChangeType($currentSubscription->pricing, $newPricing);
+            $changeType = $this->determineChangeType($currentSubscription->planPricing, $newPricing);
             if ($changeType === 'downgrade') {
                 throw new SubscriptionException(__('sub-sphere::subscription.errors.plan_downgrades_not_allowed'));
             }
@@ -146,19 +146,19 @@ class ChangeSubscriptionPlanAction
         PlanPricing $newPricing,
         ?string $currency
     ): array {
-        $oldPricing = $currentSubscription->pricing;
+        $oldPricing = $currentSubscription->planPricing;
         $changeType = $this->determineChangeType($oldPricing, $newPricing);
 
         $summary = [
-            'change_type' => $changeType,
-            'old_plan_id' => $currentSubscription->plan_id,
-            'new_plan_id' => $newPlan->id,
-            'old_pricing_id' => $oldPricing->id,
-            'new_pricing_id' => $newPricing->id,
+            'change_type'       => $changeType,
+            'old_plan_id'       => $currentSubscription->plan_id,
+            'new_plan_id'       => $newPlan->id,
+            'old_pricing_id'    => $oldPricing->id,
+            'new_pricing_id'    => $newPricing->id,
             'old_pricing_label' => $oldPricing->label,
             'new_pricing_label' => $newPricing->label,
-            'currency' => $currency ?: config('sub-sphere.currency.default', 'USD'),
-            'changed_at' => now(),
+            'currency'          => $currency ?: config('sub-sphere.currency.default', 'USD'),
+            'changed_at'        => now(),
         ];
 
         // Always calculate proration (business rule)
@@ -191,13 +191,13 @@ class ChangeSubscriptionPlanAction
     protected function calculateProration(Subscription $currentSubscription, PlanPricing $newPricing, ?string $currency): float
     {
         $daysRemaining = $currentSubscription->ends_at->diffInDays(now());
-        $totalDays = $currentSubscription->pricing->duration_in_days;
+        $totalDays = $currentSubscription->planPricing->duration_in_days;
 
         if ($daysRemaining <= 0 || $totalDays <= 0) {
             return 0.0;
         }
 
-        $oldDailyRate = $currentSubscription->pricing->getDefaultPrice() / $totalDays;
+        $oldDailyRate = $currentSubscription->planPricing->getDefaultPrice() / $totalDays;
         $newDailyRate = $newPricing->getPriceInCurrency($currency ?: config('sub-sphere.currency.default')) / $newPricing->duration_in_days;
 
         $unusedCredit = $oldDailyRate * $daysRemaining;

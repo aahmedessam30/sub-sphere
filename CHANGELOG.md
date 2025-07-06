@@ -2,6 +2,41 @@
 
 All notable changes to `sub-sphere` will be documented in this file.
 
+## [v1.3.1] - 2025-01-08
+
+### 🐛 **Critical Bug Fix Release**
+
+#### 🔧 **Complete Property Access Fixes**
+
+- **Fixed All Property Access Issues** - Corrected all instances of `$subscription->pricing` to `$subscription->planPricing` throughout the codebase:
+  - **HasSubscriptions Trait** - Fixed pricing access in subscription management methods
+  - **RenewSubscriptionsCommand.php** - Fixed pricing availability check during renewal
+  - **ChangeSubscriptionPlanAction.php** - Fixed all pricing references in plan change operations
+  - **Additional Files** - Comprehensive fix across all affected files
+- **Resolved Undefined Property Errors** - Eliminated errors caused by accessing non-existent `pricing` property
+- **Enhanced Reliability** - Ensures complete elimination of undefined property errors
+- **Improved Command Stability** - Renewal command now properly accesses plan pricing
+- **Better Plan Change Logic** - Plan change action correctly references pricing relationships
+- **Improved Code Consistency** - Ensures all subscription pricing access uses the correct `planPricing` relationship
+
+#### 🎯 **Impact**
+
+- **Complete Error Resolution** - All undefined property issues are now resolved
+- **Command Stability** - Renewal and plan change operations work reliably
+- **Consistent API** - All subscription pricing access follows correct patterns
+- **Error Prevention** - Eliminates undefined property exceptions
+- **Code Reliability** - Ensures consistent property access patterns
+- **Better Performance** - Removes potential null reference issues
+- **Production Stability** - Critical fix for applications using subscription pricing features
+
+### 🔄 **Internal Changes**
+
+- **Property Name Standardization** - Unified all pricing property access to use `planPricing`
+- **Code Quality** - Improved consistency across the codebase
+- **Error Handling** - Better error prevention through correct property access
+
+---
+
 ## [v1.3.0] - 2025-07-06
 
 ### 🔍 **Comprehensive Subscription Status Management**
