@@ -2,6 +2,73 @@
 
 All notable changes to `sub-sphere` will be documented in this file.
 
+## [v1.3.0] - 2025-07-06
+
+### 🔍 **Comprehensive Subscription Status Management**
+
+#### ✨ **New Feature: Complete Status Checking Suite**
+
+- **Enhanced `HasSubscriptions` Trait** - Added comprehensive subscription status checking functionality
+- **Complete Coverage** - Check for all available subscription statuses
+- **Analytics Support** - Get subscription counts and historical status data
+- **Business Intelligence** - Perfect for customer segmentation and retention strategies
+
+#### 🔧 **Technical Improvements**
+
+##### New Status Checking Methods
+
+- **`hasCancelledSubscription()`** - Check for cancelled subscriptions
+- **`hasPendingSubscription()`** - Check for pending subscriptions
+- **`hasTrialSubscription()`** - Check for trial subscriptions
+- **`hasInactiveSubscription()`** - Check for inactive subscriptions
+- **`hasExpiredSubscription()`** - Check for expired subscriptions
+- **`hasInactiveSubscriptions()`** - Check for any inactive status (pending, inactive, canceled, expired)
+
+##### Analytics & Utility Methods
+
+- **`getSubscriptionCountByStatus(SubscriptionStatus $status)`** - Get count of subscriptions by specific status
+- **`getSubscriptionStatuses()`** - Get all statuses the subscriber has ever had
+
+```php
+// Individual status checks
+if ($user->hasPendingSubscription()) {
+    $this->sendPaymentReminder($user);
+}
+
+if ($user->hasExpiredSubscription() && !$user->hasActiveSubscription()) {
+    $this->offerRenewalDiscount($user);
+}
+
+// Analytics and counting
+$canceledCount = $user->getSubscriptionCountByStatus(SubscriptionStatus::CANCELED);
+$allStatuses = $user->getSubscriptionStatuses(); // ['trial', 'active', 'canceled']
+```
+
+#### 🎯 **Use Cases**
+
+- **Customer Segmentation** - Identify users by subscription history patterns
+- **Marketing Campaigns** - Target users with specific subscription behaviors
+- **Retention Strategies** - Identify churn patterns and recovery opportunities
+- **Analytics Dashboard** - Track subscription lifecycle and user journeys
+- **Customer Support** - Quickly understand customer's subscription history
+- **Business Intelligence** - Comprehensive subscription status analytics
+
+#### 🏗️ **Code Quality Improvements**
+
+- **Efficient Queries** - All methods use `exists()` for optimal performance
+- **Type Safety** - Uses proper enum types throughout
+- **Consistent API** - Follows established naming conventions
+- **Historical Analysis** - Track all statuses a user has experienced
+- **Flexible Counting** - Get specific counts when needed
+
+### 🔄 **Internal Changes**
+
+- **Method Organization** - Logical grouping of all status checking methods
+- **Performance Optimization** - Efficient database queries for status checks
+- **API Consistency** - All methods follow consistent patterns and naming
+
+---
+
 ## [v1.2.0] - 2025-07-06
 
 ### 🔄 **Enhanced Subscription Management**

@@ -391,4 +391,85 @@ trait HasSubscriptions
 
         return $this->subscriptions()->create(array_merge($defaults, $attributes));
     }
+
+    /**
+     * Check if subscriber has any cancelled subscription
+     */
+    public function hasCancelledSubscription(): bool
+    {
+        return $this->subscriptions()
+            ->where('status', SubscriptionStatus::CANCELED)
+            ->exists();
+    }
+
+    /**
+     * Check if subscriber has any pending subscription
+     */
+    public function hasPendingSubscription(): bool
+    {
+        return $this->subscriptions()
+            ->where('status', SubscriptionStatus::PENDING)
+            ->exists();
+    }
+
+    /**
+     * Check if subscriber has any trial subscription
+     */
+    public function hasTrialSubscription(): bool
+    {
+        return $this->subscriptions()
+            ->where('status', SubscriptionStatus::TRIAL)
+            ->exists();
+    }
+
+    /**
+     * Check if subscriber has any inactive subscription
+     */
+    public function hasInactiveSubscription(): bool
+    {
+        return $this->subscriptions()
+            ->where('status', SubscriptionStatus::INACTIVE)
+            ->exists();
+    }
+
+    /**
+     * Check if subscriber has any expired subscription
+     */
+    public function hasExpiredSubscription(): bool
+    {
+        return $this->subscriptions()
+            ->where('status', SubscriptionStatus::EXPIRED)
+            ->exists();
+    }
+
+    /**
+     * Check if subscriber has subscriptions with any of the inactive statuses
+     */
+    public function hasInactiveSubscriptions(): bool
+    {
+        return $this->subscriptions()
+            ->whereIn('status', SubscriptionStatus::inactiveStatuses())
+            ->exists();
+    }
+
+    /**
+     * Get count of subscriptions by status
+     */
+    public function getSubscriptionCountByStatus(SubscriptionStatus $status): int
+    {
+        return $this->subscriptions()
+            ->where('status', $status)
+            ->count();
+    }
+
+    /**
+     * Get all subscription statuses the subscriber has had
+     */
+    public function getSubscriptionStatuses(): array
+    {
+        return $this->subscriptions()
+            ->distinct('status')
+            ->pluck('status')
+            ->toArray();
+    }
 }

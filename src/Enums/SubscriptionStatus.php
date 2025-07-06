@@ -12,12 +12,12 @@ namespace AhmedEssam\SubSphere\Enums;
  */
 enum SubscriptionStatus: string
 {
-    case PENDING = 'pending';
-    case TRIAL = 'trial';
-    case ACTIVE = 'active';
+    case PENDING  = 'pending';
+    case TRIAL    = 'trial';
+    case ACTIVE   = 'active';
     case INACTIVE = 'inactive';
     case CANCELED = 'canceled';
-    case EXPIRED = 'expired';
+    case EXPIRED  = 'expired';
 
     /**
      * Get all active statuses (subscription is usable)
@@ -69,12 +69,12 @@ enum SubscriptionStatus: string
     public function label(): string
     {
         return match ($this) {
-            self::PENDING => 'Pending',
-            self::TRIAL => 'Trial',
-            self::ACTIVE => 'Active',
+            self::PENDING  => 'Pending',
+            self::TRIAL    => 'Trial',
+            self::ACTIVE   => 'Active',
             self::INACTIVE => 'Inactive',
             self::CANCELED => 'Canceled',
-            self::EXPIRED => 'Expired',
+            self::EXPIRED  => 'Expired',
         };
     }
 
@@ -86,12 +86,12 @@ enum SubscriptionStatus: string
     public function validTransitions(): array
     {
         return match ($this) {
-            self::PENDING => [self::TRIAL, self::ACTIVE, self::CANCELED],
-            self::TRIAL => [self::ACTIVE, self::CANCELED, self::EXPIRED],
-            self::ACTIVE => [self::INACTIVE, self::CANCELED, self::EXPIRED],
+            self::PENDING  => [self::TRIAL, self::ACTIVE, self::CANCELED],
+            self::TRIAL    => [self::ACTIVE, self::CANCELED, self::EXPIRED],
+            self::ACTIVE   => [self::INACTIVE, self::CANCELED, self::EXPIRED],
             self::INACTIVE => [self::ACTIVE, self::CANCELED, self::EXPIRED],
-            self::CANCELED => [self::ACTIVE], // Allow reactivation
-            self::EXPIRED => [self::ACTIVE], // Allow renewal
+            self::CANCELED => [self::ACTIVE],                                    // Allow reactivation
+            self::EXPIRED  => [self::ACTIVE],                                    // Allow renewal
         };
     }
 
