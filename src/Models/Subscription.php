@@ -39,12 +39,12 @@ class Subscription extends Model
     ];
 
     protected $casts = [
-        'status' => SubscriptionStatus::class,
+        'status'          => SubscriptionStatus::class,
         'is_auto_renewal' => 'boolean',
-        'starts_at' => 'datetime',
-        'ends_at' => 'datetime',
-        'grace_ends_at' => 'datetime',
-        'trial_ends_at' => 'datetime',
+        'starts_at'       => 'datetime',
+        'ends_at'         => 'datetime',
+        'grace_ends_at'   => 'datetime',
+        'trial_ends_at'   => 'datetime',
     ];
 
     /**

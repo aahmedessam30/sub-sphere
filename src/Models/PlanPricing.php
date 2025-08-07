@@ -35,8 +35,8 @@ class PlanPricing extends Model
     ];
 
     protected $casts = [
-        'price' => 'decimal:2',
-        'is_best_offer' => 'boolean',
+        'price'            => 'decimal:2',
+        'is_best_offer'    => 'boolean',
         'duration_in_days' => 'integer',
     ];
 

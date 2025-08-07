@@ -40,7 +40,7 @@ class PlanFeature extends Model
 
     protected $casts = [
         'reset_period' => FeatureResetPeriod::class,
-        'value' => TranslatableFlexibleValueCast::class,
+        'value'        => TranslatableFlexibleValueCast::class,
     ];
 
     /**

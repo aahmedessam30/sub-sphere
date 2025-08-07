@@ -2,6 +2,42 @@
 
 All notable changes to `sub-sphere` will be documented in this file.
 
+## [v1.5.0] - 2025-08-07
+
+### 🔄 **Database Architecture Enhancement**
+
+#### 🚀 **Major Features**
+
+- **Database Enum Migration** - Converted database enums to PHP enums with string columns for better flexibility
+- **Migration Scripts** - Added comprehensive migration files with full rollback support
+- **Type Safety Maintained** - PHP enum casting preserves type safety while improving database flexibility
+- **Cross-Database Compatibility** - String columns work universally across MySQL, PostgreSQL, SQLite
+- **Zero Downtime Extensibility** - Add new enum values without database schema changes
+
+#### 🏗️ **Database Schema Changes**
+
+- **`plan_features.reset_period`** - Converted from ENUM to VARCHAR(20) with preserved data
+- **`subscriptions.status`** - Converted from ENUM to VARCHAR(20) with index management
+- **Index Preservation** - All composite indexes properly maintained during migration
+- **Data Integrity** - Safe migration with temporary columns and complete rollback support
+
+#### 🔧 **Technical Improvements**
+
+- **Enhanced IDE Support** - Better autocomplete and static analysis for enum usage
+- **Easier Testing** - Simplified mocking and validation testing of enum values  
+- **Future Extensibility** - Add new enum cases without database migrations
+- **Performance Maintained** - String columns with proper indexing maintain query performance
+- **Deployment Safety** - Complete up/down migrations for safe production deployment
+
+#### 💻 **Developer Experience**
+
+- **Backward Compatible** - No breaking changes, existing code works unchanged
+- **Type-Safe Operations** - PHP enums provide compile-time validation
+- **Enhanced Methods** - Enum methods like `label()`, `color()` continue working
+- **Documentation Updated** - Comprehensive migration guide and best practices
+
+---
+
 ## [v1.4.0] - 2025-08-07
 
 ### 🌍 **Complete Translation System Overhaul**

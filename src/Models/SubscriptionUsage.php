@@ -25,7 +25,7 @@ class SubscriptionUsage extends Model
     ];
 
     protected $casts = [
-        'used' => 'integer',
+        'used'         => 'integer',
         'last_used_at' => 'datetime',
     ];
 
