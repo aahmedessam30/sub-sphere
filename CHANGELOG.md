@@ -2,6 +2,31 @@
 
 All notable changes to `sub-sphere` will be documented in this file.
 
+## [v1.5.1] - 2025-08-08
+
+### 🔧 **Critical Migration Hotfix**
+
+#### 🚨 **Bug Fixes**
+
+- **Migration Index Conflict** - Fixed duplicate key error in `plan_features_key_reset_period_index` during enum-to-string migration
+- **Index Management** - Updated migration to properly drop existing indexes before column modifications
+- **Rollback Safety** - Enhanced down() method with proper index handling for safe rollbacks
+- **Production Compatibility** - Ensured migration works reliably across all MySQL configurations
+
+#### 🛠️ **Technical Improvements**
+
+- **Migration Sequencing** - Proper order of index drops and recreations
+- **Error Prevention** - Systematic approach to avoid duplicate index conflicts
+- **Data Integrity** - Maintained zero data loss during corrected migration process
+- **Enhanced Testing** - Added verification steps for successful migration completion
+
+#### 📋 **Files Updated**
+
+- **`database/migrations/2025_08_07_000001_convert_plan_features_reset_period_to_string.php`** - Fixed index conflict resolution
+- **Documentation** - Updated troubleshooting guide with specific fix procedures
+
+---
+
 ## [v1.5.0] - 2025-08-07
 
 ### 🔄 **Database Architecture Enhancement**
