@@ -19,6 +19,24 @@ return [
         'trial_started' => 'Your Free Trial Has Started!',
     ],
 
+    // Subscription statuses
+    'statuses' => [
+        'pending' => 'Pending',
+        'trial' => 'Trial',
+        'active' => 'Active',
+        'inactive' => 'Inactive',
+        'canceled' => 'Canceled',
+        'expired' => 'Expired',
+    ],
+
+    // Feature reset periods
+    'reset_periods' => [
+        'never' => 'Never',
+        'daily' => 'Daily',
+        'monthly' => 'Monthly',
+        'yearly' => 'Yearly',
+    ],
+
     // Exception messages
     'errors' => [
         'already_subscribed' => 'Subscriber already has an active subscription. Cancel or expire existing subscription first.',

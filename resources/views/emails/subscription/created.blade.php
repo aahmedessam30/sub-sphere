@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ __('subscription.subjects.subscription_created', ['plan_name' => $planName]) }}</title>
+    <title>{{ __('sub-sphere::subscription.subjects.subscription_created', ['plan_name' => $planName]) }}</title>
     <style>
         body {
             font-family: {{ app()->getLocale() === 'ar' ? "'Segoe UI', 'Tahoma', 'Cairo', sans-serif" : "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" }};
@@ -130,14 +130,14 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🎉 {{ __('subscription.headers.welcome') }}</h1>
-            <p>{{ __('subscription.content.created.subtitle', ['plan_name' => $planName]) }}</p>
+            <h1>🎉 {{ __('sub-sphere::subscription.headers.welcome') }}</h1>
+            <p>{{ __('sub-sphere::subscription.content.created.subtitle', ['plan_name' => $planName]) }}</p>
         </div>
 
         <div class="content">
-            <p>{{ __('subscription.content.greeting') }}</p>
+            <p>{{ __('sub-sphere::subscription.content.greeting') }}</p>
 
-            <p>{{ __('subscription.content.created.welcome_message', ['plan_name' => $planName]) }}</p>
+            <p>{{ __('sub-sphere::subscription.content.created.welcome_message', ['plan_name' => $planName]) }}</p>
 
             <div class="plan-details">
                 <div class="plan-name">{{ $planName }}</div>
@@ -152,41 +152,41 @@
 
             <div class="subscription-info">
                 <div class="info-item">
-                    <div class="info-label">{{ __('subscription.content.start_date') }}</div>
+                    <div class="info-label">{{ __('sub-sphere::subscription.content.start_date') }}</div>
                     <div class="info-value">{{ $subscription->starts_at->format('M j, Y') }}</div>
                 </div>
                 <div class="info-item">
-                    <div class="info-label">{{ __('subscription.content.status') }}</div>
+                    <div class="info-label">{{ __('sub-sphere::subscription.content.status') }}</div>
                     <div class="info-value">{{ ucfirst($subscription->status) }}</div>
                 </div>
                 @if ($subscription->ends_at)
                     <div class="info-item">
-                        <div class="info-label">{{ __('subscription.content.end_date') }}</div>
+                        <div class="info-label">{{ __('sub-sphere::subscription.content.end_date') }}</div>
                         <div class="info-value">{{ $subscription->ends_at->format('M j, Y') }}</div>
                     </div>
                 @endif
                 @if ($subscription->trial_ends_at)
                     <div class="info-item">
-                        <div class="info-label">{{ __('subscription.content.trial_ends') }}</div>
+                        <div class="info-label">{{ __('sub-sphere::subscription.content.trial_ends') }}</div>
                         <div class="info-value">{{ $subscription->trial_ends_at->format('M j, Y') }}</div>
                     </div>
                 @endif
             </div>
 
             @if ($subscription->plan->description)
-                <h3>{{ __('subscription.content.created.includes_title') }}</h3>
+                <h3>{{ __('sub-sphere::subscription.content.created.includes_title') }}</h3>
                 <p>{{ is_array($subscription->plan->description) ? $subscription->plan->description[app()->getLocale()] ?? ($subscription->plan->description['en'] ?? '') : $subscription->plan->description }}
                 </p>
             @endif
 
-            <p>{{ __('subscription.content.created.support_message') }}</p>
+            <p>{{ __('sub-sphere::subscription.content.created.support_message') }}</p>
 
-            <p>{!! __('subscription.content.regards') !!}</p>
+            <p>{!! __('sub-sphere::subscription.content.regards') !!}</p>
         </div>
 
         <div class="footer">
-            <p>{{ __('subscription.content.created.footer_note') }}</p>
-            <p>{{ __('subscription.content.created.footer_error') }}</p>
+            <p>{{ __('sub-sphere::subscription.content.created.footer_note') }}</p>
+            <p>{{ __('sub-sphere::subscription.content.created.footer_error') }}</p>
         </div>
     </div>
 </body>

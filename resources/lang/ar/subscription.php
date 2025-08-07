@@ -19,6 +19,24 @@ return [
         'trial_started' => 'بدأت فترة تجريبك المجانية!',
     ],
 
+    // Subscription statuses
+    'statuses' => [
+        'pending' => 'قيد الانتظار',
+        'trial' => 'فترة تجريبية',
+        'active' => 'نشط',
+        'inactive' => 'غير نشط',
+        'canceled' => 'ملغي',
+        'expired' => 'منتهي الصلاحية',
+    ],
+
+    // Feature reset periods
+    'reset_periods' => [
+        'never' => 'أبداً',
+        'daily' => 'يومياً',
+        'monthly' => 'شهرياً',
+        'yearly' => 'سنوياً',
+    ],
+
     // Exception messages
     'errors' => [
         'already_subscribed' => 'المشترك لديه اشتراك نشط بالفعل. يرجى إلغاء أو انتهاء الاشتراك الحالي أولاً.',

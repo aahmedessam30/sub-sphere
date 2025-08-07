@@ -2,6 +2,51 @@
 
 All notable changes to `sub-sphere` will be documented in this file.
 
+## [v1.4.0] - 2025-08-07
+
+### 🌍 **Complete Translation System Overhaul**
+
+#### 🔥 **Major Features**
+
+- **Enum Translation Support** - Added full translation support for `SubscriptionStatus` and `FeatureResetPeriod` enums
+- **Bilingual Support** - Complete English and Arabic translations with proper RTL support
+- **Translation Namespace Consistency** - Fixed 110+ translation calls to use proper `sub-sphere::` namespace prefix
+- **Email Template Updates** - Updated all email templates with consistent translation namespace
+- **Translation Publishing** - Users can now publish and customize all package translations
+- **Graceful Fallbacks** - Robust fallback mechanisms when translations are unavailable
+
+#### 🎯 **Translation Keys Added**
+
+- **Status Labels**: `pending`, `trial`, `active`, `inactive`, `canceled`, `expired`
+- **Reset Period Labels**: `never`, `daily`, `monthly`, `yearly`
+- **Complete Arabic Translations**: Full RTL language support
+- **Extensible Structure**: Easy to add more languages
+
+#### 🔧 **Technical Improvements**
+
+- **100% Translation Coverage** - Every translation call uses correct namespace
+- **Laravel Standards Compliance** - All translations follow Laravel package best practices
+- **User Customization Support** - Automatic resolution of customized vs. default translations
+- **Performance Optimized** - Minimal overhead with efficient fallback mechanisms
+
+#### 📧 **Files Updated**
+
+- All enum files with translation support and fallbacks
+- All email template files (5 templates, 110+ translation calls)
+- English and Arabic translation files
+- Listener files with corrected translation namespace
+
+#### 🚀 **Usage Examples**
+
+```php
+// Get localized labels
+SubscriptionStatus::ACTIVE->label(); // "Active" or "نشط"
+FeatureResetPeriod::MONTHLY->label(); // "Monthly" or "شهرياً"
+
+// Publish for customization
+php artisan vendor:publish --tag=sub-sphere-translations
+```
+
 ## [v1.3.1] - 2025-01-08
 
 ### 🐛 **Critical Bug Fix Release**

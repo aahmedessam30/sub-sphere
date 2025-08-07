@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace AhmedEssam\SubSphere\Enums;
 
 use Illuminate\Support\Carbon;
@@ -14,22 +12,30 @@ use Illuminate\Support\Carbon;
  */
 enum FeatureResetPeriod: string
 {
-    case NEVER = 'never';
-    case DAILY = 'daily';
+    case NEVER   = 'never';
+    case DAILY   = 'daily';
     case MONTHLY = 'monthly';
-    case YEARLY = 'yearly';
+    case YEARLY  = 'yearly';
 
     /**
      * Get human-readable label for the reset period
      */
     public function label(): string
     {
-        return match ($this) {
-            self::NEVER => 'Never',
-            self::DAILY => 'Daily',
-            self::MONTHLY => 'Monthly',
-            self::YEARLY => 'Yearly',
-        };
+        $translationKey = "sub-sphere::subscription.reset_periods.$this->value";
+        $translation    = __($translationKey);
+
+        // Fallback to hardcoded values if translation is not found
+        if ($translation === $translationKey) {
+            return match ($this) {
+                self::NEVER   => 'Never',
+                self::DAILY   => 'Daily',
+                self::MONTHLY => 'Monthly',
+                self::YEARLY  => 'Yearly',
+            };
+        }
+
+        return $translation;
     }
 
     /**
@@ -40,10 +46,10 @@ enum FeatureResetPeriod: string
         $from = $from ?? now();
 
         return match ($this) {
-            self::NEVER => null,
-            self::DAILY => $from->copy()->addDay()->startOfDay(),
+            self::NEVER   => null,
+            self::DAILY   => $from->copy()->addDay()->startOfDay(),
             self::MONTHLY => $from->copy()->addMonth()->startOfMonth(),
-            self::YEARLY => $from->copy()->addYear()->startOfYear(),
+            self::YEARLY  => $from->copy()->addYear()->startOfYear(),
         };
     }
 

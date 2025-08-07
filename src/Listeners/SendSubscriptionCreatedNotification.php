@@ -43,9 +43,9 @@ class SendSubscriptionCreatedNotification implements ShouldQueue
         } catch (\Exception $e) {
             Log::error('Failed to send subscription created notification', [
                 'subscription_id' => $event->subscription->id,
-                'subscriber_id' => $event->subscriber->getKey(),
+                'subscriber_id'   => $event->subscriber->getKey(),
                 'subscriber_type' => get_class($event->subscriber),
-                'error' => $e->getMessage(),
+                'error'           => $e->getMessage(),
             ]);
         }
     }
@@ -59,7 +59,7 @@ class SendSubscriptionCreatedNotification implements ShouldQueue
 
         if (!$email) {
             Log::warning('No email found for new subscriber', [
-                'subscriber_id' => $event->subscriber->getKey(),
+                'subscriber_id'   => $event->subscriber->getKey(),
                 'subscriber_type' => get_class($event->subscriber),
             ]);
             return;
@@ -69,9 +69,9 @@ class SendSubscriptionCreatedNotification implements ShouldQueue
 
         Log::info('Welcome email sent to new subscriber', [
             'subscription_id' => $event->subscription->id,
-            'email' => $email,
-            'plan_name' => $event->plan->name,
-            'has_trial' => $event->hasTrial(),
+            'email'           => $email,
+            'plan_name'       => $event->plan->name,
+            'has_trial'       => $event->hasTrial(),
         ]);
     }
 
@@ -82,18 +82,18 @@ class SendSubscriptionCreatedNotification implements ShouldQueue
     {
         $planName = $event->plan->getLocalizedName();
 
-        Log::info(__('subscription.logs.subscription_created', [
+        Log::info(__('sub-sphere::subscription.logs.subscription_created', [
             'email' => $this->getSubscriberEmail($event->subscriber),
-            'plan' => $planName,
+            'plan'  => $planName,
         ]), [
-            'subscription_id' => $event->subscription->id,
-            'subscriber_id' => $event->subscriber->getKey(),
-            'subscriber_type' => get_class($event->subscriber),
-            'plan_id' => $event->plan->id,
-            'plan_name' => $planName,
-            'details' => $event->details,
-            'has_trial' => $event->hasTrial(),
-            'is_recurring' => $event->isRecurring(),
+            'subscription_id'   => $event->subscription->id,
+            'subscriber_id'     => $event->subscriber->getKey(),
+            'subscriber_type'   => get_class($event->subscriber),
+            'plan_id'           => $event->plan->id,
+            'plan_name'         => $planName,
+            'details'           => $event->details,
+            'has_trial'         => $event->hasTrial(),
+            'is_recurring'      => $event->isRecurring(),
             'formatted_summary' => $event->getFormattedSummary(),
         ]);
     }
@@ -125,9 +125,9 @@ class SendSubscriptionCreatedNotification implements ShouldQueue
     {
         Log::error('Subscription created notification job failed', [
             'subscription_id' => $event->subscription->id,
-            'subscriber_id' => $event->subscriber->getKey(),
-            'error' => $exception->getMessage(),
-            'trace' => $exception->getTraceAsString(),
+            'subscriber_id'   => $event->subscriber->getKey(),
+            'error'           => $exception->getMessage(),
+            'trace'           => $exception->getTraceAsString(),
         ]);
     }
 }

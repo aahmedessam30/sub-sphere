@@ -41,4 +41,4 @@ Thumbs.db
 
 # Copilot instructions
 /.github
-/.github/copilot-instructions.md
+/prompt_collector.py

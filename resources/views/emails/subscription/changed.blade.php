@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ __('subscription.subjects.subscription_changed') }}</title>
+    <title>{{ __('sub-sphere::subscription.subjects.subscription_changed') }}</title>
     <style>
         body {
             font-family: {{ app()->getLocale() === 'ar' ? "'Segoe UI', 'Tahoma', 'Cairo', sans-serif" : "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" }};
@@ -156,43 +156,43 @@
         <div class="header @if ($changeType === 'downgrade') downgrade @endif">
             <h1>
                 @if ($changeType === 'upgrade')
-                    🚀 {{ __('subscription.headers.upgraded') }}
+                    🚀 {{ __('sub-sphere::subscription.headers.upgraded') }}
                 @elseif($changeType === 'downgrade')
-                    📋 {{ __('subscription.headers.downgraded') }}
+                    📋 {{ __('sub-sphere::subscription.headers.downgraded') }}
                 @else
-                    🔄 {{ __('subscription.headers.changed') }}
+                    🔄 {{ __('sub-sphere::subscription.headers.changed') }}
                 @endif
             </h1>
             <p>
                 @if ($changeType === 'upgrade')
-                    {{ __('subscription.content.upgraded.subtitle', ['plan_name' => $newPlan->name]) }}
+                    {{ __('sub-sphere::subscription.content.upgraded.subtitle', ['plan_name' => $newPlan->name]) }}
                 @elseif($changeType === 'downgrade')
-                    {{ __('subscription.content.downgraded.subtitle', ['plan_name' => $newPlan->name]) }}
+                    {{ __('sub-sphere::subscription.content.downgraded.subtitle', ['plan_name' => $newPlan->name]) }}
                 @else
-                    {{ __('subscription.subjects.subscription_changed') }}
+                    {{ __('sub-sphere::subscription.subjects.subscription_changed') }}
                 @endif
             </p>
         </div>
 
         <div class="content">
-            <p>{{ __('subscription.content.greeting') }}</p>
+            <p>{{ __('sub-sphere::subscription.content.greeting') }}</p>
 
             <p>
                 @if ($changeType === 'upgrade')
-                    {!! __('subscription.content.upgraded.congratulations', ['plan_name' => $newPlan->name]) !!}
+                    {!! __('sub-sphere::subscription.content.upgraded.congratulations', ['plan_name' => $newPlan->name]) !!}
                 @elseif($changeType === 'downgrade')
-                    {!! __('subscription.content.downgraded.change_message', ['plan_name' => $newPlan->name]) !!}
+                    {!! __('sub-sphere::subscription.content.downgraded.change_message', ['plan_name' => $newPlan->name]) !!}
                 @else
-                    {!! __('subscription.content.downgraded.change_message', ['plan_name' => $newPlan->name]) !!}
+                    {!! __('sub-sphere::subscription.content.downgraded.change_message', ['plan_name' => $newPlan->name]) !!}
                 @endif
             </p>
 
             <div class="change-summary @if ($changeType === 'downgrade') downgrade @endif">
                 <h3>
                     @if ($changeType === 'downgrade')
-                        {{ __('subscription.content.downgraded.change_confirmation') }}
+                        {{ __('sub-sphere::subscription.content.downgraded.change_confirmation') }}
                     @else
-                        {{ __('subscription.content.downgraded.change_confirmation') }}
+                        {{ __('sub-sphere::subscription.content.downgraded.change_confirmation') }}
                     @endif
                 </h3>
 
@@ -230,46 +230,46 @@
             </div>
 
             <div class="effective-date">
-                <strong>{{ __('subscription.content.change_effective') }}</strong>
+                <strong>{{ __('sub-sphere::subscription.content.change_effective') }}</strong>
                 {{ $effectiveDate->format('M j, Y \a\t g:i A') }}
             </div>
 
             @if ($newPlan->description)
-                <h3>{{ __('subscription.content.plan_includes') }}</h3>
+                <h3>{{ __('sub-sphere::subscription.content.plan_includes') }}</h3>
                 <p>{{ is_array($newPlan->description) ? $newPlan->description[app()->getLocale()] ?? ($newPlan->description['en'] ?? '') : $newPlan->description }}
                 </p>
             @endif
 
             @if ($changeType === 'upgrade')
-                <p>{{ __('subscription.content.upgraded.getting_started_text') }}</p>
+                <p>{{ __('sub-sphere::subscription.content.upgraded.getting_started_text') }}</p>
             @elseif($changeType === 'downgrade')
-                <p>{{ __('subscription.content.downgraded.need_help_text') }}</p>
+                <p>{{ __('sub-sphere::subscription.content.downgraded.need_help_text') }}</p>
             @endif
 
             <p>
                 @if ($changeType === 'downgrade')
-                    {{ __('subscription.content.downgraded.thank_you') }}
+                    {{ __('sub-sphere::subscription.content.downgraded.thank_you') }}
                 @else
-                    {{ __('subscription.content.upgraded.thank_you') }}
+                    {{ __('sub-sphere::subscription.content.upgraded.thank_you') }}
                 @endif
             </p>
 
-            <p>{!! __('subscription.content.regards') !!}</p>
+            <p>{!! __('sub-sphere::subscription.content.regards') !!}</p>
         </div>
 
         <div class="footer">
             <p>
                 @if ($changeType === 'downgrade')
-                    {{ __('subscription.content.downgraded.footer_note') }}
+                    {{ __('sub-sphere::subscription.content.downgraded.footer_note') }}
                 @else
-                    {{ __('subscription.content.upgraded.footer_note') }}
+                    {{ __('sub-sphere::subscription.content.upgraded.footer_note') }}
                 @endif
             </p>
             <p>
                 @if ($changeType === 'downgrade')
-                    {{ __('subscription.content.downgraded.footer_question') }}
+                    {{ __('sub-sphere::subscription.content.downgraded.footer_question') }}
                 @else
-                    {{ __('subscription.content.upgraded.footer_question') }}
+                    {{ __('sub-sphere::subscription.content.upgraded.footer_question') }}
                 @endif
             </p>
         </div>

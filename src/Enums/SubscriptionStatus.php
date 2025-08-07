@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace AhmedEssam\SubSphere\Enums;
 
 /**
@@ -68,14 +66,22 @@ enum SubscriptionStatus: string
      */
     public function label(): string
     {
-        return match ($this) {
-            self::PENDING  => 'Pending',
-            self::TRIAL    => 'Trial',
-            self::ACTIVE   => 'Active',
-            self::INACTIVE => 'Inactive',
-            self::CANCELED => 'Canceled',
-            self::EXPIRED  => 'Expired',
-        };
+        $translationKey = "sub-sphere::subscription.statuses.$this->value";
+        $translation    = __($translationKey);
+
+        // Fallback to hardcoded values if translation is not found
+        if ($translation === $translationKey) {
+            return match ($this) {
+                self::PENDING  => 'Pending',
+                self::TRIAL    => 'Trial',
+                self::ACTIVE   => 'Active',
+                self::INACTIVE => 'Inactive',
+                self::CANCELED => 'Canceled',
+                self::EXPIRED  => 'Expired',
+            };
+        }
+
+        return $translation;
     }
 
     /**
@@ -90,8 +96,8 @@ enum SubscriptionStatus: string
             self::TRIAL    => [self::ACTIVE, self::CANCELED, self::EXPIRED],
             self::ACTIVE   => [self::INACTIVE, self::CANCELED, self::EXPIRED],
             self::INACTIVE => [self::ACTIVE, self::CANCELED, self::EXPIRED],
-            self::CANCELED => [self::ACTIVE],                                    // Allow reactivation
-            self::EXPIRED  => [self::ACTIVE],                                    // Allow renewal
+            self::CANCELED => [self::ACTIVE],                                    
+            self::EXPIRED  => [self::ACTIVE],                                    
         };
     }
 

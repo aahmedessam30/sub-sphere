@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ __('subscription.subjects.trial_started') }}</title>
+    <title>{{ __('sub-sphere::subscription.subjects.trial_started') }}</title>
     <style>
         body {
             font-family: {{ app()->getLocale() === 'ar' ? "'Segoe UI', 'Tahoma', 'Cairo', sans-serif" : "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" }};
@@ -152,21 +152,21 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🎯 {{ __('subscription.headers.trial_started') }}</h1>
-            <p>{{ __('subscription.content.trial.subtitle', ['plan_name' => $subscription->plan->name]) }}</p>
+            <h1>🎯 {{ __('sub-sphere::subscription.headers.trial_started') }}</h1>
+            <p>{{ __('sub-sphere::subscription.content.trial.subtitle', ['plan_name' => $subscription->plan->name]) }}</p>
         </div>
 
         <div class="content">
-            <p>{{ __('subscription.content.greeting') }}</p>
+            <p>{{ __('sub-sphere::subscription.content.greeting') }}</p>
 
-            <p>{{ __('subscription.content.trial.welcome_message', ['plan_name' => $subscription->plan->name]) }}</p>
+            <p>{{ __('sub-sphere::subscription.content.trial.welcome_message', ['plan_name' => $subscription->plan->name]) }}</p>
 
             <div class="trial-highlight">
-                <div>{{ __('subscription.content.trial.trial_includes') }}</div>
+                <div>{{ __('sub-sphere::subscription.content.trial.trial_includes') }}</div>
                 <div class="trial-days">
-                    {{ __('subscription.content.trial.trial_days', ['days' => $subscription->trial_ends_at->diffInDays($subscription->starts_at)]) }}
+                    {{ __('sub-sphere::subscription.content.trial.trial_days', ['days' => $subscription->trial_ends_at->diffInDays($subscription->starts_at)]) }}
                 </div>
-                <div>{{ __('subscription.content.trial.trial_access', ['plan_name' => $subscription->plan->name]) }}
+                <div>{{ __('sub-sphere::subscription.content.trial.trial_access', ['plan_name' => $subscription->plan->name]) }}
                 </div>
             </div>
 
@@ -177,57 +177,57 @@
                     @if ($subscription->plan->billing_interval)
                         / {{ $subscription->plan->billing_interval }}
                     @endif
-                    <small style="color: #718096;">{{ __('subscription.content.trial.after_trial') }}</small>
+                    <small style="color: #718096;">{{ __('sub-sphere::subscription.content.trial.after_trial') }}</small>
                 </div>
             </div>
 
             <div class="trial-info">
                 <div class="info-item">
-                    <div class="info-label">{{ __('subscription.content.trial.trial_info_started') }}</div>
+                    <div class="info-label">{{ __('sub-sphere::subscription.content.trial.trial_info_started') }}</div>
                     <div class="info-value">{{ $subscription->starts_at->format('M j, Y') }}</div>
                 </div>
                 <div class="info-item">
-                    <div class="info-label">{{ __('subscription.content.trial.trial_info_ends') }}</div>
+                    <div class="info-label">{{ __('sub-sphere::subscription.content.trial.trial_info_ends') }}</div>
                     <div class="info-value">{{ $subscription->trial_ends_at->format('M j, Y') }}</div>
                 </div>
                 <div class="info-item">
-                    <div class="info-label">{{ __('subscription.content.trial.trial_info_status') }}</div>
+                    <div class="info-label">{{ __('sub-sphere::subscription.content.trial.trial_info_status') }}</div>
                     <div class="info-value">{{ ucfirst($subscription->status) }}</div>
                 </div>
                 <div class="info-item">
-                    <div class="info-label">{{ __('subscription.content.trial.trial_info_remaining') }}</div>
+                    <div class="info-label">{{ __('sub-sphere::subscription.content.trial.trial_info_remaining') }}</div>
                     <div class="info-value">{{ $subscription->trial_ends_at->diffInDays(now()) }}
-                        {{ __('subscription.content.days_remaining') }}</div>
+                        {{ __('sub-sphere::subscription.content.days_remaining') }}</div>
                 </div>
             </div>
 
             @if ($subscription->plan->description)
-                <h3>{{ __('subscription.content.trial.what_you_get') }}</h3>
+                <h3>{{ __('sub-sphere::subscription.content.trial.what_you_get') }}</h3>
                 <p>{{ is_array($subscription->plan->description) ? $subscription->plan->description[app()->getLocale()] ?? ($subscription->plan->description['en'] ?? '') : $subscription->plan->description }}
                 </p>
             @endif
 
             <div class="cta-section">
-                <h3>{{ __('subscription.content.trial.make_most_title') }}</h3>
-                <p>{{ __('subscription.content.trial.make_most_text') }}</p>
+                <h3>{{ __('sub-sphere::subscription.content.trial.make_most_title') }}</h3>
+                <p>{{ __('sub-sphere::subscription.content.trial.make_most_text') }}</p>
             </div>
 
-            <h3>{{ __('subscription.content.trial.important_title') }}</h3>
+            <h3>{{ __('sub-sphere::subscription.content.trial.important_title') }}</h3>
             <ul>
-                <li>{!! __('subscription.content.trial.no_charges') !!}</li>
-                <li>{!! __('subscription.content.trial.cancel_anytime') !!}</li>
-                <li>{!! __('subscription.content.trial.auto_conversion') !!}</li>
-                <li>{!! __('subscription.content.trial.full_access') !!}</li>
+                <li>{!! __('sub-sphere::subscription.content.trial.no_charges') !!}</li>
+                <li>{!! __('sub-sphere::subscription.content.trial.cancel_anytime') !!}</li>
+                <li>{!! __('sub-sphere::subscription.content.trial.auto_conversion') !!}</li>
+                <li>{!! __('sub-sphere::subscription.content.trial.full_access') !!}</li>
             </ul>
 
-            <p>{{ __('subscription.content.trial.support_message') }}</p>
+            <p>{{ __('sub-sphere::subscription.content.trial.support_message') }}</p>
 
-            <p>{!! __('subscription.content.regards') !!}</p>
+            <p>{!! __('sub-sphere::subscription.content.regards') !!}</p>
         </div>
 
         <div class="footer">
-            <p>{{ __('subscription.content.trial.footer_note') }}</p>
-            <p>{{ __('subscription.content.trial.footer_reminder') }}</p>
+            <p>{{ __('sub-sphere::subscription.content.trial.footer_note') }}</p>
+            <p>{{ __('sub-sphere::subscription.content.trial.footer_reminder') }}</p>
         </div>
     </div>
 </body>

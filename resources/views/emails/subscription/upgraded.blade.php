@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ __('subscription.subjects.subscription_upgraded') }}</title>
+    <title>{{ __('sub-sphere::subscription.subjects.subscription_upgraded') }}</title>
     <style>
         body {
             font-family: {{ app()->getLocale() === 'ar' ? "'Segoe UI', 'Tahoma', 'Cairo', sans-serif" : "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" }};
@@ -154,19 +154,19 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🚀 {{ __('subscription.headers.upgraded') }}</h1>
-            <p>{{ __('subscription.content.upgraded.subtitle', ['plan_name' => $newPlan->name]) }}</p>
+            <h1>🚀 {{ __('sub-sphere::subscription.headers.upgraded') }}</h1>
+            <p>{{ __('sub-sphere::subscription.content.upgraded.subtitle', ['plan_name' => $newPlan->name]) }}</p>
         </div>
 
         <div class="content">
-            <p>{{ __('subscription.content.greeting') }}</p>
+            <p>{{ __('sub-sphere::subscription.content.greeting') }}</p>
 
-            <p>{!! __('subscription.content.upgraded.congratulations', ['plan_name' => $newPlan->name]) !!}</p>
+            <p>{!! __('sub-sphere::subscription.content.upgraded.congratulations', ['plan_name' => $newPlan->name]) !!}</p>
 
             <div class="upgrade-highlight">
                 <h2 style="margin: 0 0 10px 0;">🎉
-                    {{ __('subscription.content.upgraded.welcome_box_title', ['plan_name' => $newPlan->name]) }}</h2>
-                <p style="margin: 0;">{{ __('subscription.content.upgraded.welcome_box_subtitle') }}</p>
+                    {{ __('sub-sphere::subscription.content.upgraded.welcome_box_title', ['plan_name' => $newPlan->name]) }}</h2>
+                <p style="margin: 0;">{{ __('sub-sphere::subscription.content.upgraded.welcome_box_subtitle') }}</p>
             </div>
 
             <div class="plan-comparison">
@@ -194,53 +194,53 @@
             </div>
 
             <div class="effective-date">
-                <strong>{{ __('subscription.content.upgrade_effective') }}</strong>
+                <strong>{{ __('sub-sphere::subscription.content.upgrade_effective') }}</strong>
                 {{ $effectiveDate->format('M j, Y \a\t g:i A') }}
             </div>
 
             @if ($newPlan->description)
                 <div class="features-list">
-                    <h3 style="margin-top: 0; color: #2d3748;">{{ __('subscription.content.plan_includes') }}</h3>
+                    <h3 style="margin-top: 0; color: #2d3748;">{{ __('sub-sphere::subscription.content.plan_includes') }}</h3>
                     <p>{{ is_array($newPlan->description) ? $newPlan->description[app()->getLocale()] ?? ($newPlan->description['en'] ?? '') : $newPlan->description }}
                     </p>
                 </div>
             @endif
 
             <div class="features-list">
-                <h3 style="margin-top: 0; color: #2d3748;">{{ __('subscription.content.upgraded.features_title') }}
+                <h3 style="margin-top: 0; color: #2d3748;">{{ __('sub-sphere::subscription.content.upgraded.features_title') }}
                 </h3>
                 <div class="feature-item">
                     <span class="feature-icon">✓</span>
-                    <span>{{ __('subscription.content.upgraded.immediate_access') }}</span>
+                    <span>{{ __('sub-sphere::subscription.content.upgraded.immediate_access') }}</span>
                 </div>
                 <div class="feature-item">
                     <span class="feature-icon">✓</span>
-                    <span>{{ __('subscription.content.upgraded.enhanced_functionality') }}</span>
+                    <span>{{ __('sub-sphere::subscription.content.upgraded.enhanced_functionality') }}</span>
                 </div>
                 <div class="feature-item">
                     <span class="feature-icon">✓</span>
-                    <span>{{ __('subscription.content.upgraded.priority_support') }}</span>
+                    <span>{{ __('sub-sphere::subscription.content.upgraded.priority_support') }}</span>
                 </div>
                 <div class="feature-item">
                     <span class="feature-icon">✓</span>
-                    <span>{{ __('subscription.content.upgraded.advanced_tools') }}</span>
+                    <span>{{ __('sub-sphere::subscription.content.upgraded.advanced_tools') }}</span>
                 </div>
             </div>
 
-            <h3>{{ __('subscription.content.upgraded.getting_started_title') }}</h3>
-            <p>{{ __('subscription.content.upgraded.getting_started_text') }}</p>
+            <h3>{{ __('sub-sphere::subscription.content.upgraded.getting_started_title') }}</h3>
+            <p>{{ __('sub-sphere::subscription.content.upgraded.getting_started_text') }}</p>
 
-            <h3>{{ __('subscription.content.upgraded.billing_title') }}</h3>
-            <p>{{ __('subscription.content.upgraded.billing_text') }}</p>
+            <h3>{{ __('sub-sphere::subscription.content.upgraded.billing_title') }}</h3>
+            <p>{{ __('sub-sphere::subscription.content.upgraded.billing_text') }}</p>
 
-            <p>{{ __('subscription.content.upgraded.thank_you') }}</p>
+            <p>{{ __('sub-sphere::subscription.content.upgraded.thank_you') }}</p>
 
-            <p>{!! __('subscription.content.regards') !!}</p>
+            <p>{!! __('sub-sphere::subscription.content.regards') !!}</p>
         </div>
 
         <div class="footer">
-            <p>{{ __('subscription.content.upgraded.footer_note') }}</p>
-            <p>{{ __('subscription.content.upgraded.footer_question') }}</p>
+            <p>{{ __('sub-sphere::subscription.content.upgraded.footer_note') }}</p>
+            <p>{{ __('sub-sphere::subscription.content.upgraded.footer_question') }}</p>
         </div>
     </div>
 </body>
