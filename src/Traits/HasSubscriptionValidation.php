@@ -243,4 +243,41 @@ trait HasSubscriptionValidation
 
         return $this->hasFeature($featureKey);
     }
+
+    /**
+     * Check if a subscription can be duplicated
+     */
+    public function canDuplicateSubscription(?int $subscriptionId = null): bool
+    {
+        $subscription = $subscriptionId
+            ? $this->subscriptions()->find($subscriptionId)
+            : $this->subscriptions()->latest()->first();
+
+        if (!$subscription) {
+            return false;
+        }
+
+        // Check if subscriber already has active subscription
+        if ($this->hasActiveSubscription()) {
+            return false;
+        }
+
+        // Only allow duplication of non-active subscriptions
+        $allowedStatuses = [
+            SubscriptionStatus::EXPIRED,
+            SubscriptionStatus::CANCELED,
+            SubscriptionStatus::INACTIVE,
+        ];
+
+        if (!in_array($subscription->status, $allowedStatuses, true)) {
+            return false;
+        }
+
+        // Validate that the plan is still active
+        if (!$subscription->plan || !$subscription->plan->is_active) {
+            return false;
+        }
+
+        return true;
+    }
 }

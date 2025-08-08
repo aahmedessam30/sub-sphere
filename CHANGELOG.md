@@ -2,6 +2,50 @@
 
 All notable changes to `sub-sphere` will be documented in this file.
 
+## [v1.6.0] - 2025-08-08
+
+### 🚀 **Major Feature Release - Subscription Duplication**
+
+#### ✨ **New Features**
+
+- **DuplicateSubscriptionAction** - Comprehensive subscription duplication with intelligent date and usage handling
+- **Enhanced Validation** - Extended HasSubscriptionValidation trait with new validation methods
+- **Trial Integration** - Smart trial period support using configuration values
+- **Usage Reset Management** - Automatic feature usage counter reset while preserving limits
+- **Flexible Start Dates** - Support for custom subscription start dates or current timestamp defaults
+- **Event Integration** - Full event dispatching for SubscriptionCreated, SubscriptionStarted, and TrialStarted
+- **Comprehensive Testing** - Complete test suite with 10 test scenarios and 36 assertions
+
+#### 🔧 **Technical Improvements**
+
+- **Action Architecture** - Follows established BaseAction pattern for consistency
+- **Database Transactions** - Proper transaction wrapping for data integrity
+- **Configuration Integration** - Leverages sub-sphere.trial_period_days config
+- **Column Standardization** - Fixed starts_at vs started_at consistency across codebase
+- **Query Optimization** - Efficient database operations with minimal hits
+- **Memory Efficiency** - Optimized for handling multiple usage records
+
+#### 📋 **Files Added**
+
+- **`src/Actions/DuplicateSubscriptionAction.php`** - Main duplication action class
+- **`tests/Feature/DuplicateSubscriptionActionTest.php`** - Comprehensive test coverage
+
+#### 🎯 **Use Cases Enabled**
+
+- **Customer Re-engagement** - Easy restart of expired subscriptions with trial incentives
+- **Subscription Migration** - Move customers to new billing cycles seamlessly  
+- **Promotional Campaigns** - Restart canceled subscriptions with fresh usage counters
+- **Flexible Scheduling** - Custom start dates for subscription planning
+
+#### ⚡ **Performance & Safety**
+
+- **Zero Breaking Changes** - Fully backward compatible
+- **Transaction Safety** - All operations wrapped in database transactions
+- **Validation Guards** - Comprehensive ownership and status validation
+- **Event Optimization** - Strategic event dispatching to prevent overhead
+
+---
+
 ## [v1.5.1] - 2025-08-08
 
 ### 🔧 **Critical Migration Hotfix**
